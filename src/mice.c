@@ -2403,7 +2403,7 @@ Gpm_Type mice[]={
 #ifdef HAVE_LINUX_INPUT_H
    {"evdev", "Linux Event Device",
             "", M_evdev, I_empty, STD_FLG,
-                        {0x00, 0x00, 0x00, 0x00} , 16, 16, 0, 0, NULL},
+                        {0x00, 0x00, 0x00, 0x00} , sizeof(struct input_event), sizeof(struct input_event), 0, 0, NULL},
 #endif /* HAVE_LINUX_INPUT_H */
    {"exps2",   "IntelliMouse Explorer (ps2) - 3 buttons, wheel unused",
            "ExplorerPS/2", M_imps2, I_exps2, STD_FLG,
