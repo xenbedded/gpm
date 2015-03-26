@@ -75,8 +75,8 @@
 #include "headers/daemon.h"
 #include "headers/twiddler.h"
 #include "headers/synaptics.h"
+#include "headers/evdev.h"
 #include "headers/message.h"
-
 
 /*========================================================================*/
 /* Parsing argv: helper dats struct function (should they get elsewhere?) */
@@ -254,6 +254,20 @@ static int M_evdev (Gpm_Event * state, unsigned char *data)
    }
    return 0;
 }
+
+//Initialize support for evdev absolute events.
+Gpm_Type * I_evdev_abs(int fd, unsigned short flags, struct Gpm_Type *type, int argc, char **argv) 
+{
+    return initialize_evdev_absolute_device(fd, flags, type, argc, argv);
+}
+
+//Process absolute events for evdev tablet devices.
+static int M_evdev_abs (Gpm_Event * state, unsigned char *data)
+{
+    return process_evdev_absolute_event(state, data);
+}
+
+
 #endif /* HAVE_LINUX_INPUT_H */
 
 static int M_ms(Gpm_Event *state,  unsigned char *data)
@@ -2401,9 +2415,12 @@ Gpm_Type mice[]={
            "", M_etouch, I_etouch, STD_FLG,
                                 {0xFF, 0x55, 0xFF, 0x54}, 7, 1, 0, 1, NULL}, 
 #ifdef HAVE_LINUX_INPUT_H
-   {"evdev", "Linux Event Device",
+   {"evdev", "Linux Relative Event Device",
             "", M_evdev, I_empty, STD_FLG,
                         {0x00, 0x00, 0x00, 0x00} , sizeof(struct input_event), sizeof(struct input_event), 0, 0, NULL},
+   {"evabs", "Linux Absolute Event Device (Tablet, Touchpad, or Touchscreen)",
+            "", M_evdev_abs, I_evdev_abs, STD_FLG,
+                        {0x00, 0x00, 0x00, 0x00} , sizeof(struct input_event), sizeof(struct input_event), 0, 1, NULL},
 #endif /* HAVE_LINUX_INPUT_H */
    {"exps2",   "IntelliMouse Explorer (ps2) - 3 buttons, wheel unused",
            "ExplorerPS/2", M_imps2, I_exps2, STD_FLG,

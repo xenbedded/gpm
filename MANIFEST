@@ -16,6 +16,7 @@ src/
    mice.c         support for (almost) all the pointer types
    twiddler.c     the twiddler keyboard needs special code
    synaptics.c    and the synaptics table too
+   evdev.c        the evdev absolute driver needs more complex handling
 
    liblow.c       low-level gpm library
    libhigh.c      high-level gpm library
@@ -37,6 +38,7 @@ src/
       message.h   messages
       synaptics.h synaptics tablet implementation
       twiddler.h  twiddler keyboaard implementation
+      evdev.h     evdev tablet handling
 
       config.h.in [build by autoheader] template for config.h
                                                       [build by ./configure]

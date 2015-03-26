@@ -13,7 +13,7 @@ include $(top_builddir)/Makefile.include
 
 # Main portion: regular build rules
 
-GSRC = mice.c twiddler.c synaptics.c 														\
+GSRC = mice.c twiddler.c synaptics.c evdev.c 										\
 		daemon/add_mouse.c daemon/init_mice.c daemon/reset_mice.c					\
 		daemon/build_argv.c daemon/disable_paste.c daemon/do_client.c				\
 		daemon/do_selection.c daemon/get_console_size.c daemon/get_data.c			\
@@ -35,7 +35,7 @@ LOBJ = $(LSRC:.c=.o) tools.o @CURSES_OBJS@
 
 PICS = $(LOBJ:.o=.lo)
 
-HDRS = gpm.h gpmInt.h twiddler.h synaptics.h message.h
+HDRS = gpm.h gpmInt.h twiddler.h synaptics.h evdev.h message.h
 
 PSRC = prog/mev.c prog/hltest.c prog/mouse-test.c prog/disable-paste.c			\
 		 prog/display-buttons.c  prog/display-coords.c prog/get-versions.c
@@ -153,7 +153,7 @@ prog/gpm-root: prog/gpm-root.c lib/libgpm.so.@abi_lev@
 	$(CC) -I. @CPPFLAGS@ $(CPPFLAGS) @CFLAGS@ $(CFLAGS) -c -o $@.o $<
 	$(CC) @LDFLAGS@ $(LDFLAGS) -o $@ $@.o @LIBS@ $(LIBS) lib/libgpm.so.@abi_lev@
 
-prog/mouse-test:	prog/mouse-test.o mice.o twiddler.o synaptics.o prog/open_console.o
+prog/mouse-test:	prog/mouse-test.o mice.o twiddler.o synaptics.o evdev.o prog/open_console.o
 	$(CC) @LDFLAGS@ $(LDFLAGS) -o $@ $^ @LIBS@ $(LIBS) -lm
 
 $(PROG):	lib/libgpm.so.@abi_lev@
