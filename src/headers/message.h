@@ -83,6 +83,8 @@
          "    -k               kill a running gpm, to start X with a busmouse\n" \
          "    -l charset       loads the inword() LUT (default '%s')\n" \
          "    -m mouse-device  sets mouse device\n" \
+         "    -n               disables selection, so mouse can only be used for clicks\n" \
+         "    -N               disables rendering of the pointer; appropriate for touchscreens\n" \
          "    -M               enable multiple mice. Following options refer to\n" \
          "                     the second device. Forces \"-R\"\n" \
          "    -o options       decoder-specific options (e.g.: \"dtr\", \"rts\")\n" \

@@ -64,6 +64,8 @@ void startup(int argc, char **argv)
    option.micelist      = NULL;                 /* no mice found yet */
    option.repeater      = 0;                    /* repeat data */
    option.repeater_type = NULL;                 /* type of */
+   option.no_pointer    = 0;
+   option.no_selection  = 0;
 
 
    cmdline(argc, argv);                         /* parse command line */

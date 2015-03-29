@@ -32,7 +32,7 @@
 void cmdline(int argc, char **argv)
 {
    extern struct options option;
-   char options[]="a:A::b:B:d:Dg:hi:kl:m:Mo:pr:R::s:S:t:Tuv23";
+   char options[]="a:A::b:B:d:Dg:hi:kl:m:MnNo:pr:R::s:S:t:Tuv23";
    int  opt;
 
    /* initialize for the dual mouse */ 
@@ -60,6 +60,9 @@ void cmdline(int argc, char **argv)
             if (option.repeater_type == 0)
                option.repeater_type = "msc";
             which_mouse=mouse_table+2;                   break;
+
+         case 'n': option.no_selection = 1;              break;
+         case 'N': option.no_pointer = 1;                break;
          case 'o': add_mouse(GPM_ADD_OPTIONS,optarg);
                    gpm_report(GPM_PR_DEBUG,"options: %s",optarg);
                    (which_mouse->opt_options) = optarg;                 break; /* GO AWAY */

@@ -29,6 +29,16 @@ int do_selection(Gpm_Event *event)  /* returns 0, always */
    static int x1=1, y1=1, x2, y2;
 #define UNPOINTER() 0
 
+   //If we've been asked to skip rendering the pointer, do so.
+   if(option.no_pointer) {
+      return 0;
+   }
+
+   //And if select is disabled, force all events to be movement events.
+   if(option.no_selection) {
+      event->type = GPM_MOVE;
+   }
+
    x2=event->x; y2=event->y;
    switch(GPM_BARE_EVENTS(event->type)) {
       case GPM_MOVE:

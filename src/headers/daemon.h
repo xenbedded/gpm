@@ -47,6 +47,8 @@ struct options {
    char           *progname;           /* hopefully gpm ;)                    */
    struct micetab *micelist;           /* mice and their options              */
    char           *consolename;        /* /dev/tty0 || /dev/vc/0              */
+   char           no_selection;        /* do not show the selection           */ 
+   char           no_pointer;          /* do not show the pointer             */ 
 };
 
 typedef struct Gpm_Cinfo {
